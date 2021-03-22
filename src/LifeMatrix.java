@@ -18,10 +18,15 @@ public class LifeMatrix {
 
     public void nextGeneration(){
         int tmpMatrix[][] = new int[_size][_size];
+        int countN;
         for(int row = 0; row < _size; row++){
             for(int col = 0; col < _size; col++){
-                tmpMatrix[row][col] = nextStatus(_matrix[row][col], countNeighbours(row, col));
+                countN = countNeighbours(row, col);
+                tmpMatrix[row][col] = nextStatus(_matrix[row][col], countN);
+                System.out.print(countN + " ");
             }
+            System.out.print("\n");
+
         }
         for(int row = 0; row < _size; row++){
             for(int col = 0; col < _size; col++){
