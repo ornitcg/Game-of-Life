@@ -22,11 +22,9 @@ public class Tester {
             if (input == 0)
                 panel.get_mat().nextGeneration();
             panel.repaint();
-            input = JOptionPane.showConfirmDialog(null, "Press Ok for next generation");
+            input = JOptionPane.showConfirmDialog(null, "Press Yes for next generation");
 
         }
-        frame.setVisible(false);
     }
-
 
 }

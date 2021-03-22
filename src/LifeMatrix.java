@@ -8,7 +8,7 @@ public class LifeMatrix {
         _matrix = new int[_size][_size];
         for(int row = 0; row < _size; row++){
             for(int col = 0; col < _size; col++){
-                stat = (int)((Math.random() * 2)) ;
+                stat = (int)((Math.random() * 2));
                 _matrix[row][col] = stat;
             }
         }
@@ -23,9 +23,9 @@ public class LifeMatrix {
             for(int col = 0; col < _size; col++){
                 countN = countNeighbours(row, col);
                 tmpMatrix[row][col] = nextStatus(_matrix[row][col], countN);
-                System.out.print(countN + " ");
+                //System.out.print(countN + " ");
             }
-            System.out.print("\n");
+            //System.out.print("\n");
 
         }
         for(int row = 0; row < _size; row++){
@@ -44,7 +44,7 @@ public class LifeMatrix {
             else return 0;
         }
         else {
-            if (liveNeighbors >=1 || liveNeighbors >=4)
+            if (liveNeighbors <=1 || liveNeighbors >=4)
                 return 0;
             else return 1; // 2 or 3 lives around
         }
@@ -55,10 +55,10 @@ public class LifeMatrix {
         int countAlive =0 ;
         for (int i = row-1 ; i <= row +1; i++)
             for (int j = col - 1; j <= col + 1; j++) {
-                if (isValid(i,j) && _matrix[i][j] == 1)
+                if ( isValid(i,j) && _matrix[i][j] == 1 )
                     countAlive += 1;
             }
-        return countAlive;
+        return countAlive - _matrix[row][col]; // subtracting "myself" (if 0, nothing happens)
     }
 
 
