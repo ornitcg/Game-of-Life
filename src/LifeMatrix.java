@@ -2,6 +2,7 @@ public class LifeMatrix {
     private int _size;
     private int _matrix[][];
 
+    // constructor - creates the initial matrix with random values of 0 and 1
     public LifeMatrix(int size){
         int stat;
         _size = size;
@@ -15,19 +16,20 @@ public class LifeMatrix {
     }
 
 
-
+    // calculates the values of the matrix in the next generation
+    // using a temporary matrix to hold the new values until calculation is done
+    // then copies the temp matrix content into the main matrix
     public void nextGeneration(){
         int tmpMatrix[][] = new int[_size][_size];
         int countN;
+
         for(int row = 0; row < _size; row++){
             for(int col = 0; col < _size; col++){
                 countN = countNeighbours(row, col);
                 tmpMatrix[row][col] = nextStatus(_matrix[row][col], countN);
-                //System.out.print(countN + " ");
             }
-            //System.out.print("\n");
-
         }
+
         for(int row = 0; row < _size; row++){
             for(int col = 0; col < _size; col++){
                 _matrix[row][col] = tmpMatrix[row][col];
@@ -36,7 +38,8 @@ public class LifeMatrix {
     }
 
 
-
+    // The rules of the game of life
+    // predicts a cell's next status according to its current status and neighbors
     private int nextStatus(int currentStatus, int liveNeighbors){
         if (currentStatus == 0){
             if (liveNeighbors == 3 )
@@ -50,7 +53,7 @@ public class LifeMatrix {
         }
     }
 
-
+    // calculates the number of alive neighbors of current cell
     private int countNeighbours(int row, int col){
         int countAlive =0 ;
         for (int i = row-1 ; i <= row +1; i++)
@@ -58,16 +61,18 @@ public class LifeMatrix {
                 if ( isValid(i,j) && _matrix[i][j] == 1 )
                     countAlive += 1;
             }
-        return countAlive - _matrix[row][col]; // subtracting "myself" (if 0, nothing happens)
+        return countAlive - _matrix[row][col]; // subtracting current cells status (if 0, nothing happens anyway)
     }
 
 
-
+    // checks if a given coordinate is within matrix boundaries
     private boolean isValid(int row, int col){
         if (row < 0 || row >= _size || col < 0 || col >= _size)
             return false;
         return true;
     }
+
+    // getters
 
     public int get_size(){
         return _size;
